@@ -49,6 +49,9 @@ declare DRY_RUN=false
 # @info:    Boolean to flag if Containers should be stopped.
 declare STOP_CONTAINERS=false
 
+# @info:    Boolean to flag if Containers should be force-removed.
+declare FORCE_RM_CONTAINERS=false
+
 # @info:	Boolean to flag if containers should be deleted.
 declare CLEAN_CONTAINERS=false
 
@@ -107,6 +110,7 @@ function parseCli(){
 			run ) CLEAN_CONTAINERS=true; CLEAN_IMAGES=true; CLEAN_VOLUMES=true; CLEAN_NETWORKS=true ;;
 			all ) STOP_CONTAINERS=true; DELETE_TAGGED=true; CLEAN_CONTAINERS=true; CLEAN_IMAGES=true; CLEAN_VOLUMES=true; CLEAN_NETWORKS=true ;;
 			-s | --stop) STOP_CONTAINERS=true ;;
+			-f | --force) FORCE_RM_CONTAINERS=true; STOP_CONTAINERS=true; CLEAN_CONTAINERS=true ;;
 			-n | --dry-run) DRY_RUN=true ;;
 			-l | --log) VERBOSE=true ;;
 			-c | --containers) CLEAN_CONTAINERS=true ;;
@@ -161,6 +165,8 @@ function usage {
 	echo "-s   or --stop        Stops all running containers"
 	echo
   	echo "-c   or --containers  Removes all stopped containers"
+	echo
+	echo "-f   or --force        Forces removal of all runnig containers (implies --containers and --stop)"
 	echo
   	echo "-i   or --images      Removes all untagged images"
 	echo
@@ -314,7 +320,11 @@ function cleanContainers {
 				name="$(docker inspect -f '{{json .Name}}' "$i")"
 				path="$(docker inspect -f '{{json .Path}}' "$i")"
 				args="$(docker inspect -f '{{json .Args}}' "$i")"
-				docker rm "$i" &>/dev/null
+				rm_options=""
+				if ${FORCE_RM_CONTAINERS}; then
+					rm_optionsi+=" -f"
+				fi
+				docker rm ${rm_options} "$i" &>/dev/null
 				status=$?
 				if [[ $status -eq 0 ]] ; then
 					count=$((count+1))
@@ -747,7 +757,7 @@ function dockerClean {
 	setGlobal
 	#fi
 
-	if $STOP_CONTAINERS; then
+	if $STOP_CONTAINERS && ! $FORCE_RM_CONTAINERS; then
 		stop
 	fi
 	if $CLEAN_CONTAINERS; then

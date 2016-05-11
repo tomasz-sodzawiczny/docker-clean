@@ -128,6 +128,18 @@
   clean
 }
 
+@test "Force-remove all Containers Test" {
+  build
+  [ $status = 0 ]
+  allContainers="$(docker ps -a -q)"
+  [ "$allContainers" ]
+  run ./docker-clean -f
+  allContainers="$(docker ps -a -q)"
+  [ ! "$allContainers" ]
+
+  clean
+}
+
 # TODO: create an untagged image test case
 @test "Clean images (not all)" {
   skip
