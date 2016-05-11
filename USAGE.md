@@ -14,6 +14,8 @@ This guide walks through proper usage and briefly explains the command(s) behind
 
     -c   or --containers  Removes all stopped containers
 
+     -f   or --force        Forces removal of all runnig containers (implies --containers and --stop)
+
     -i   or --images      Removes all untagged images
 
     -net or --networks    Removes all empty Networks (all network cleans are only empty)
