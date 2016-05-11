@@ -7,18 +7,18 @@ This guide walks through proper usage and briefly explains the command(s) behind
 
      "Additional Flag options:"
 
-     -n   or --dry-run    Adding this additional flag will list items to be
-                          removed without executing any stopping or removing commands"
+     -n   or --dry-run     Adding this additional flag will list items to be
+                           removed without executing any stopping or removing commands"
 
-     -s   or --stop       Stops all running containers
+     -s   or --stop        Stops all running containers
 
-    -c   or --containers  Removes all stopped containers
+     -c   or --containers  Removes all stopped containers
 
-     -f   or --force        Forces removal of all runnig containers (implies --containers and --stop)
+     -f   or --force       Forces removal of all runnig containers (implies --containers and --stop)
 
-    -i   or --images      Removes all untagged images
+     -i   or --images      Removes all untagged images
 
-    -net or --networks    Removes all empty Networks (all network cleans are only empty)
+     -net or --networks    Removes all empty Networks (all network cleans are only empty)
 
      -r   or --restart     Restarts the docker machine/daemon
 

@@ -141,9 +141,9 @@ function usage {
 	echo "  Docker Clean Usage Options: "
 	echo "-------------------------------"
 	echo
-  	echo "-h or --help        Opens this help menu"
-  	echo "-v or --version     Prints the current docker-clean version"
-  	echo
+	echo "-h or --help        Opens this help menu"
+	echo "-v or --version     Prints the current docker-clean version"
+	echo
 	echo " Running without any options will remove dangling volumes and untagged images only."
 	echo " All of the options are option, and while they overlap they can all be run concurrently."
 	echo " NOTE: By default, created containers will always be included, see -d, --created."
@@ -164,13 +164,13 @@ function usage {
 	echo
 	echo "-s   or --stop        Stops all running containers"
 	echo
-  	echo "-c   or --containers  Removes all stopped containers"
+	echo "-c   or --containers  Removes all stopped containers"
 	echo
-	echo "-f   or --force        Forces removal of all runnig containers (implies --containers and --stop)"
+	echo "-f   or --force       Forces removal of all runnig containers (implies --containers and --stop)"
 	echo
-  	echo "-i   or --images      Removes all untagged images"
+	echo "-i   or --images      Removes all untagged images"
 	echo
-  	echo "-net or --networks    Removes all empty Networks (all network cleans are only empty)"
+	echo "-net or --networks    Removes all empty Networks (all network cleans are only empty)"
 	echo
 	echo "-r   or --restart     Restarts the docker machine/daemon"
 	echo
